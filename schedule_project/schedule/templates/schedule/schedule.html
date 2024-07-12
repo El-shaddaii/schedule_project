@@ -1,0 +1,62 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weekly Schedule</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    
+</head>
+<body>
+    <h1>Weekly Work Schedule</h1>
+    <table id="schedule">
+        <thead>
+            <tr>
+                <th>Time</th>
+                <th>Mon</th>
+                <th>Tue</th>
+                <th>Wed</th>
+                <th>Thu</th>
+                <th>Fri</th>
+                <th>Sat</th>
+                <th>Sun</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for hour in hours %}
+                <tr>
+                    <td>{{ hour }}</td>
+                    <td class="cell" id="Mon-{{ hour }}"></td>
+                    <td class="cell" id="Tue-{{ hour }}"></td>
+                    <td class="cell" id="Wed-{{ hour }}"></td>
+                    <td class="cell" id="Thu-{{ hour }}"></td>
+                    <td class="cell" id="Fri-{{ hour }}"></td>
+                    <td class="cell" id="Sat-{{ hour }}"></td>
+                    <td class="cell" id="Sun-{{ hour }}"></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <script>
+        // Render events in the schedule
+        document.addEventListener('DOMContentLoaded', () => {
+            const events = {{ events|safe }};
+            events.forEach(event => {
+                const dayCell = document.getElementById(`${event.day}-${event.start_hour}`);
+                dayCell.innerText = event.name;
+                dayCell.setAttribute('rowspan', event.duration);
+                dayCell.style.backgroundColor = 'lightblue';
+                for (let i = 1; i < event.duration; i++) {
+                    const nextCell = document.getElementById(`${event.day}-${event.start_hour + i}`);
+                    if (nextCell) {
+                        nextCell.style.display = 'none';
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+

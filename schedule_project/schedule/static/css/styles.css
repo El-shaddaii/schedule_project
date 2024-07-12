@@ -1,0 +1,59 @@
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh; /* Full viewport height */
+    margin: 0;
+    font-family: Arial, sans-serif;
+    text-align: center; /* Center text in the body */
+}
+table {
+    justify-self: center;
+    align-self: center;
+    width: 80%;
+    border-collapse: collapse;
+    
+}
+th, td {
+    border: 1px solid #ac1414;
+    
+    text-align: center;
+}
+.cell {
+    height: 5px;
+}
+h1{
+    justify-self: center;
+    align-self: center;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    table {
+        width: 100%; /* Full width on small screens */
+    }
+
+    th, td {
+      
+        font-size: 14px; /* Adjust font size */
+    }
+
+    h1 {
+        font-size: 24px; /* Smaller heading */
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 20px; /* Even smaller heading */
+    }
+
+    th, td {
+        font-size: 12px; /* Further reduce font size */
+    }
+
+    .cell {
+        height: 5px; /* Smaller cell height */
+    }
+}
